@@ -1,0 +1,26 @@
+uuu_version 1.2.39
+
+# Loading U-boot:
+SDP: boot -f u-boot-dtb1.imx -nojump
+#SDP: write -f qspi.bin -addr 0x80800000 
+SDP: write -f u-boot-dtb1.imx -addr 0x86800000
+# Loading Kernel:
+#SDP: write -f zImage -addr 0x86800000
+
+# Loading device tree:
+#SDP: write -f imx6ull-14x14-evk.dtb -addr 0x83000000
+
+# Loading Initramfs:
+#SDP: write -f initramfs.cpio.gz.u-boot -addr 0x83800000
+
+SDP: jump -f u-boot-dtb1.imx -ivt
+
+FB: done
+
+#bootz ${kernel_addr_r} ${ramdisk_addr_r}:${filesize} ${fdt_addr_r}
+#bootz 0x80800000 83800000:${filesize} 0x83000000
+
+#bootz ${kernel_addr_r} ${ramdisk_addr_r}:${filesize} ${fdt_addr_r}
+#bootz 0x80800000 83800000:${filesize} 0x83000000
+#bootz 0x86800000 0x83800000 0x83000000
+#bootm 0x86800000 - 0x83000000x830000000000
